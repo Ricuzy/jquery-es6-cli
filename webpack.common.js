@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const devMode = process.env.NODE_ENV !== 'production';
 
+
 const Config = require('./Config');
 
 let HtmlPlugins = [];
@@ -19,7 +20,7 @@ Config.pages.forEach((page) => {
 		cache: true
 	});
 	HtmlPlugins.push(htmlPlugin);
-	Entries[page] = `./js/${page}.js`;
+	Entries[page] = `./js/${page}/index.js`;
 });
 
 module.exports = {

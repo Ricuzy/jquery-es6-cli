@@ -3,6 +3,7 @@ const common = require('./webpack.common.js');
 const path = require('path');
 const webpack = require('webpack');
 const { getIP } = require('./Config/util');
+const config = require('./Config/index');
 
 module.exports = merge(common, {
 	mode: 'development',
@@ -18,24 +19,18 @@ module.exports = merge(common, {
 		historyApiFallback: true,
 		hot: true,
 		host: getIP(),
-		port: 8000,
+		port: config.port,
 		overlay: true,
 		compress: true,
 		inline: true,
 		progress: true,
 		clientLogLevel: 'none',
 		openPage: 'pages/index.html',
-		// proxy: {     //如果需要配置代理
-		// 	'/wws-c/comment/submit': {
-		// 		target: 'http://wws.test.ximalaya.com',
-		// 		changeOrigin: true,
-		// 		secure: false
-		// 	}
-		// }
+		proxy: config.proxy || {}
 	},
 	
 	plugins: [
 		new webpack.NamedModulesPlugin(),
-		new webpack.HotModuleReplacementPlugin(),
+		new webpack.HotModuleReplacementPlugin()
 	]
 });
