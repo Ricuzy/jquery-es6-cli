@@ -2,8 +2,8 @@ const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 const path = require('path');
 const webpack = require('webpack');
-const { getIP } = require('./Config/util');
-const config = require('./Config/index');
+const { getIP } = require('./config/util');
+const config = require('./config/index');
 
 module.exports = merge(common, {
 	mode: 'development',

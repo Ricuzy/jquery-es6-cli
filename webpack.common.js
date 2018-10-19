@@ -4,7 +4,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const devMode = process.env.NODE_ENV !== 'production';
 
 
-const Config = require('./Config');
+const Config = require('./config');
 
 let HtmlPlugins = [];
 
@@ -17,10 +17,13 @@ Config.pages.forEach((page) => {
 		template: path.resolve(__dirname, `./pages/${page}.html`), //要使用的html模板文件
 		chunks: [page],
 		inject: true,
-		cache: true
+		cache: true,
+        minify: {
+		    removeComments: true
+        }
 	});
 	HtmlPlugins.push(htmlPlugin);
-	Entries[page] = `./js/${page}/index.js`;
+	Entries[page] = `./js/${page}.js`;
 });
 
 module.exports = {

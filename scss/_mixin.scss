@@ -1,32 +1,24 @@
-@function px2rem($px, $base-font-size: 75px) {
-  @if (unitless($px)){
-    @return px2rem($px + 0px);
-  }
-  @else if (unit($px)==rem) {
-    @return $px;
-  }
-  @return ($px / $base-font-size) * 1rem;
-}
-@mixin font-dpr($font-size) {
-  font-size: $font-size/2;
+@charset "utf-8";
 
-  [data-dpr="2"] & {
-    font-size: $font-size;
-  }
+$vw_fontsize: 75;
+$vw_base: 750;
 
-  [data-dpr="3"] & {
-    font-size: $font-size * 1.5;
-  }
+@function px2rem($px) {
+    @return ($px / $vw_fontsize ) * 1rem;
 }
 
-%clearfix {
-  &:after,
-  &:before {
-    content: " ";
-    display: table;
-  }
+html {
+    padding: 0;
+    margin: 0;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);        //修复iOS下点击闪动问题
+    cursor: pointer;                                   //修改iOS下点击事件失效问题
+    font-size: ($vw_fontsize / $vw_base) * 100vw;
 
-  &:after {
-    clear: both;
-  }
+    @media screen and (max-width: 320px) {
+        font-size: 32px;
+    }
+
+    @media screen and (min-width: 640px) {
+        font-size: 64px;
+    }
 }
