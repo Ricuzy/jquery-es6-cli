@@ -1,9 +1,7 @@
 import '../scss/index.scss';
+import { a } from './utils/index';
 
-(function () {
-    window.addEventListener('scroll', function (e) {
-        console.log('------------------------');
-        console.log(1);
-        console.log('------------------------');
-    }, false);
-})();
+
+console.log('------------------------');
+console.log(a);
+console.log('------------------------');
