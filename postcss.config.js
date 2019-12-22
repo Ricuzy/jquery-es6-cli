@@ -6,6 +6,6 @@ module.exports = ({ file, options, env }) => ({
 			warnForDuplicates: false,
 			browsers: ['last 2 versions', '> 5%']
 		},
-		'cssnano':  env === 'production'  ? {} : false
+		cssnano: env === 'production' ? {} : false
 	}
 });

@@ -1,27 +1,30 @@
+import axios from 'axios'
 
+const baseCreateParams = {
+    timeout: 1000,
+    baseURL: ''
+}
 
-let ajax = function (params, callback) {
-    let url = params.url || '';
-    let type = params.type || 'GET';
-    let async = params.async || true;
-    let data = params.data || null;
+const baseRequestInterceptor = res => {}
 
-    let xhr = new XMLHttpRequest();
+const baseResponseInterceptor = res => res.data
 
-    xhr.onload = xhr.onreadystatechange = function () {
-        let res = JSON.parse(xhr.responseText);
-        if (this.readyState === 4 && this.status === 200) {
-            callback(res);
-        }
-    };
+function createBaseAxiosInstance(
+    axiosConfig = baseCreateParams,
+    requestInterceptor = baseRequestInterceptor,
+    responseInterceptor = baseResponseInterceptor
+) {
+    const axioInstance = axios.create(axiosConfig)
 
-    xhr.open(type, url, async);
+    axioInstance.interceptors.request.use(res => {
+        requestInterceptor.call(null, res)
+    })
 
-    if (params.contentType) {
-        xhr.setRequestHeader('Content-type', params.contentType);
-    }
+    axioInstance.interceptors.response.use(res => {
+        responseInterceptor.call(null, res)
+    })
 
-    xhr.send(data);
-};
+    return axioInstance
+}
 
-ajax();
+export default createBaseAxiosInstance

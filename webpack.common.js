@@ -13,7 +13,7 @@ let Entries = {};
 Config.pages.forEach(page => {
 	const htmlPlugin = new HtmlWebpackPlugin({
 		title: `${page}`, // html文件的title
-		filename: `./pages/${page}.html`, // 打包后的html文件
+		filename: `./${page}.html`, // 打包后的html文件
 		template: path.resolve(__dirname, `./pages/${page}.html`), //要使用的html模板文件
 		chunks: [page],
 		inject: true,

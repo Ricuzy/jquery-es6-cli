@@ -23,7 +23,7 @@ module.exports = merge(common, {
 	output: {
 		path: path.resolve(__dirname, 'dist'),
 		publicPath: publicPath,
-		filename: 'js/[name].js'
+		filename: 'js/[name].[hash:6].js'
 	},
 	plugins: [
 		new CleanWebpackPlugin(['dist']),
